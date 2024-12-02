@@ -40,6 +40,10 @@ struct EarlyModswitchPass
     mlir::OpBuilder builder(func);
     mlir::IRRewriter rewriter(builder);
 
+    int64_t initLevelValue = 16;
+    auto initLevelAttr = builder.getIntegerAttr(builder.getIntegerType(64), initLevelValue);
+    func->setAttr("init_level", initLevelAttr);
+
     SmallVector<mlir::Type, 4> inputTypes;
 
     auto &&bb = func.getBody().getBlocks().front();

@@ -15,6 +15,7 @@ add_mlir_dialect_library(EarthTransforms
  CandidateSelection.cpp
  SMUChecker.cpp
  SNRRescaling.cpp
+ MyProactiveRescaling.cpp
  ProactiveRescaling.cpp
  ScaleManagementScheduler.cpp
  ELASMExplorer.cpp

@@ -2,6 +2,7 @@ export HECATE=$( cd -- "$( dirname -- "$BASH_SOURCE[0]" )" &> /dev/null && pwd )
 export CC="clang"
 export CXX="clang++"
 
+shopt -s expand_aliases
 alias hopt=$HECATE/build/bin/hecate-opt
 alias hopt-debug=$HECATE/build-debug/bin/hecate-opt
 

@@ -82,6 +82,20 @@ struct EmitHEVMPass : public hecate::ckks::impl::EmitHEVMBase<EmitHEVMPass> {
       ret_dst.push_back(cipher_register_file[arg]);
     }
 
+    SmallVector<int64_t, 4> ascale; ascale.push_back(40);
+    auto new_ascale = DenseI64ArrayAttr::get(func->getContext(), ascale);
+    func->setAttr("arg_scale", new_ascale);
+
+    SmallVector<int64_t, 4> rscale; rscale.push_back(40);
+    auto new_rscale = DenseI64ArrayAttr::get(func->getContext(), rscale);
+    func->setAttr("res_scale", new_rscale);
+
+    auto context = func->getContext();
+    auto builder = mlir::OpBuilder(context);
+    int64_t initLevelValue = 16;
+    auto initLevelAttr = builder.getIntegerAttr(builder.getIntegerType(64), initLevelValue);
+    func->setAttr("init_level", initLevelAttr);
+
     auto arg_scale_array =
         func->getAttrOfType<DenseI64ArrayAttr>("arg_scale").asArrayRef();
     auto arg_level_array =

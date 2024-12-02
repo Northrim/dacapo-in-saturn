@@ -58,6 +58,22 @@ def ProactiveRescaling : Pass<"proactive-rescaling", "::mlir::func::FuncOp"> {
     "The maximum result value bits of return value">,
   ];
 }
+def MyProactiveRescaling : Pass<"my-proactive-rescaling", "::mlir::func::FuncOp"> {
+  let summary = "Apply a Modified Proactive Rescaling";
+  let description = [{
+    This pass implements the modified proactive rescaling of Hecate.
+  }];
+  let options = [
+    Option<"waterline", "waterline", "int64_t", /*default=*/"20",
+    "The minimal result scale of rescaling">,
+    Option<"output_val", "output_val", "int64_t", /*default=*/"10",
+    "The maximum result value bits of return value">,
+    Option<"in_scale", "in_scale", "int64_t", /*default=*/"20",
+    "The scale of the input to the function">,
+    Option<"in_level", "in_level", "int64_t", /*default=*/"0",
+    "The level of the input to the function">,
+  ];
+}
 def EarlyModswitch: Pass<"early-modswitch", "::mlir::func::FuncOp"> {
   let summary = "Apply Early Modswitch";
   let description = [{
